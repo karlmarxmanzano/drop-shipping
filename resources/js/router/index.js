@@ -5,6 +5,9 @@ import Home from '../views/pages/Home'
 import SignIn from '../views/pages/SignIn'
 import SignUp from '../views/pages/SignUp'
 import Dashboard from '../views/pages/Dashboard'
+
+import ProductIndex from '../views/pages/product/Index'
+
 import store from '../store/index'
 
 Vue.use(VueRouter)
@@ -29,6 +32,20 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['authenticated']) {
+                next({
+                    name: 'home'
+                })
+            }
+
+            next();
+        }
+    },
+    {
+        path: '/product/list',
+        name: 'ProductIndex',
+        component: ProductIndex,
         beforeEnter: (to, from, next) => {
             if (!store.getters['authenticated']) {
                 next({
