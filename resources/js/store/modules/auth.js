@@ -4,12 +4,16 @@ export default {
     namespaced: true,
     state: {
         token: null,
-        user: null
+        user: null,
+        auth: false
     },
 
     mutations: {
         SET_TOKEN (state, token) {
             state.token = token
+        },
+        SET_AUTH (state, payload) {
+            state.auth = payload
         },
         SET_USER (state, data) {
             state.user = data
@@ -39,10 +43,12 @@ export default {
                 let response = await axios.get('/auth/me')
 
                 commit('SET_USER', response.data)
+                commit('SET_AUTH', true)
 
             } catch (err) {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
+                commit('SET_AUTH', false)
             }
         },
         signOut ({ commit }) {
@@ -56,7 +62,7 @@ export default {
 
     getters: {
         authenticated (state) {
-            return state.token && state.user
+            return state.auth
         },
         user (state) {
             return state.user

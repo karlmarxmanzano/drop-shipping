@@ -33,7 +33,7 @@ const routes = [
         name: 'dashboard',
         component: Dashboard,
         beforeEnter: (to, from, next) => {
-            if (!store.getters['authenticated']) {
+            if (!store.getters['auth/authenticated']) {
                 next({
                     name: 'home'
                 })
@@ -47,9 +47,9 @@ const routes = [
         name: 'ProductIndex',
         component: ProductIndex,
         beforeEnter: (to, from, next) => {
-            if (!store.getters['authenticated']) {
+            if (!store.getters['auth/authenticated']) {
                 next({
-                    name: 'home'
+                    name: 'signin'
                 })
             }
 

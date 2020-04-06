@@ -8,43 +8,10 @@
                         New Product
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="onFormSubmit">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    id="name"
-                                    v-model="form.name">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    id="description"
-                                    v-model="form.description">
-                            </div>
-                            <div class="form-group">
-                                <label for="quantity">Quantity</label>
-                                <input 
-                                    type="number" 
-                                    class="form-control" 
-                                    id="quantity"
-                                    v-model="form.quantity">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Amount</label>
-                                <input 
-                                    type="number" 
-                                    class="form-control" 
-                                    id="amount"
-                                    v-model="form.amount">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
-                        </form>
+                        <ProductFrom 
+                            :isEdit="isEdit"
+                            :productId="productId"
+                            ></ProductFrom>
                     </div>
                 </div>
             </div>
@@ -79,7 +46,7 @@
                                     <td>{{ product.description }}</td>
                                     <td>{{ product.quantity }}</td>
                                     <td>{{ product.amount }}</td>
-                                    <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                                    <td><a href="#" @click.prevent="onGetProductInfo(product.id)">Edit</a> | <a href="#">Delete</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -93,33 +60,43 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+
+    import ProductFrom from './Form'
+
     export default {
         name: 'ProductIndex',
         data () {
             return {
-                form: {
-                    name: '',
-                    description: '',
-                    quantity: 0,
-                    amount: 0
-                }
+                isEdit: false,
+                productId: null
+            }
+        },
+        computed: {
+            isEdit () {
+                return this.isEdit
             }
         },
         methods: {
             ...mapActions({
-                addProduct: 'product/createProduct'
+                getProducts: 'product/allProducts'
+            }),
+            ...mapGetters({
+                pinfo: 'product/productInfo'
             }),
             loadList () {
-                return this.$store.dispatch('product/allProducts')
+                return this.getProducts()
             },
-            onFormSubmit () {
-                return this.addProduct(this.form)
-            },
+            onGetProductInfo (payload) {
+                this.productId = payload
+            }
         },
         computed: {
             ...mapGetters({
                 list: 'product/productList'
             })
+        },
+        components: {
+            ProductFrom
         },
         mounted () {
             this.loadList()

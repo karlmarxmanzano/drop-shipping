@@ -9,7 +9,7 @@ export default {
     },
 
     mutations: {
-        SET_PRODUCT (state, payload) {
+        SET_PRODUCT_INFO (state, payload) {
             state.product = payload
         },
         SET_LIST (state, payload) {
@@ -22,6 +22,15 @@ export default {
             return await axios.get('/product/list', payload)
                 .then(res => {
                     commit('SET_LIST', res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        async getProductInfo ({ commit }, payload) {
+            return await axios.get('/product/details/' + payload)
+                .then(res => {
+                    commit('SET_PRODUCT_INFO', res.data)
                 })
                 .catch(err => {
                     console.log(err)
