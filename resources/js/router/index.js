@@ -2,11 +2,38 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../views/pages/Home'
-import SignIn from '../views/pages/SignIn'
-import SignUp from '../views/pages/SignUp'
+import SignIn from '../views/pages/auth/SignIn'
+import SignUp from '../views/pages/auth/SignUp'
 import Dashboard from '../views/pages/Dashboard'
 
+/**
+ * 
+ * User
+ * 
+ */
+import User from '../views/pages/users/User'
+
+/**
+ * 
+ * Product
+ * 
+ */
+
 import ProductIndex from '../views/pages/product/Index'
+
+/**
+ * 
+ * Permission
+ * 
+ */
+import Permission from '../views/pages/permissons/Permission'
+
+/**
+ * 
+ * Permission
+ * 
+ */
+import Role from '../views/pages/roles/Role'
 
 import store from '../store/index'
 
@@ -30,32 +57,47 @@ const routes = [
     },
     {
         path: '/dashboard',
-        name: 'dashboard',
+        name: 'Dashboard',
         component: Dashboard,
-        beforeEnter: (to, from, next) => {
-            if (!store.getters['auth/authenticated']) {
-                next({
-                    name: 'home'
-                })
-            }
+        // beforeEnter: (to, from, next) => {
+        //     if (!store.getters['auth/authenticated']) {
+        //         next({
+        //             name: 'home'
+        //         })
+        //     }
 
-            next();
-        }
+        //     next();
+        // }
+    },
+    {
+        path: '/users/list',
+        name: 'User',
+        component: User
     },
     {
         path: '/product/list',
-        name: 'ProductIndex',
+        name: 'Product',
         component: ProductIndex,
-        beforeEnter: (to, from, next) => {
-            if (!store.getters['auth/authenticated']) {
-                next({
-                    name: 'signin'
-                })
-            }
+        // beforeEnter: (to, from, next) => {
+        //     if (!store.getters['auth/authenticated']) {
+        //         next({
+        //             name: 'signin'
+        //         })
+        //     }
 
-            next();
-        }
-    }
+        //     next();
+        // }
+    },
+    {
+        path: '/permissions/list',
+        name: 'Permission',
+        component: Permission
+    },
+    {
+        path: '/roles/list',
+        name: 'Role',
+        component: Role
+    },
 ]
 
 const router = new VueRouter({

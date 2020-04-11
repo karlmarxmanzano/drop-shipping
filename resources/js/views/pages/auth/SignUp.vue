@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Sign In
+                        Register
                     </div>
                     <div class="card-body">
                         <!-- <div 
@@ -13,7 +13,16 @@
                             v-if="error">
                             {{ error }}
                         </div> -->
-                        <form @submit.prevent="onSignIn">
+                        <form @submit.prevent="">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    class="form-control" 
+                                    placeholder="Name"
+                                    v-model="name">
+                            </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input 
@@ -22,7 +31,7 @@
                                     class="form-control" 
                                     aria-describedby="emailHelp" 
                                     placeholder="Enter email"
-                                    v-model="form.email">
+                                    v-model="email">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                             <div class="form-group">
@@ -32,8 +41,12 @@
                                     name="password" 
                                     class="form-control" 
                                     placeholder="Password"
-                                    v-model="form.password">
+                                    v-model="password">
                             </div>
+                            <!-- <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" name="confirmPassword" class="form-control" placeholder="Password">
+                            </div> -->
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -46,33 +59,17 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
-    export default {
-        name: 'signin',
-        data () {
-            return {
-                form: {
-                    email: '',
-                    password: ''
-                }
-            }
-        },
-        methods: {
-            ...mapActions({
-                signIn: 'auth/signIn'
-            }),
-            onSignIn () {
-                this.signIn(this.form)
-                    .then(() => {
-                        this.$router.replace({ name: 'dashboard' })
-                    })
-                    .catch(() => {
-                        this.$router.replace({ name: 'home' })
-                    })
-            }
-        },
-        components: {
-
+export default {
+    name: 'SignUp',
+    data() {
+        return {
+            name: '',
+            email: '',
+            password: ''
         }
+    },
+    components: {
+
     }
+}
 </script>

@@ -33,3 +33,15 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('edit/{product}', 'ProductController@update');
     Route::post('delete/{product}', 'ProductController@destroy');
 });
+
+Route::group(['prefix' => 'permissions'], function () {
+    Route::get('list', 'PermissionController@index');
+});
+
+Route::group(['prefix' => 'roles'], function () {
+    Route::get('list', 'RoleController@index');
+});
+
+Route::group(['prefix' => 'users'], function () {
+    Route::get('list', 'UserController@index');
+});

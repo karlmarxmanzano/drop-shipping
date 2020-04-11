@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <!-- <div class="container">
         <div class="row justify-content-center">
             
             <div class="col-md-4">
@@ -33,14 +33,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr>
-                                    <th scope="row">1</th>
-                                    <td>T-shirt</td>
-                                    <td>Plain white</td>
-                                    <td>1</td>
-                                    <td>79.00</td>
-                                    <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-                                </tr> -->
                                 <tr v-for="(product, key) in list" v-bind:key="key">
                                     <td>{{ product.name }}</td>
                                     <td>{{ product.description }}</td>
@@ -55,20 +47,54 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
+    <v-container>
+        <v-row>
+            <v-col cols="4">
+                <v-card>
+                    <v-card-text>
+                        <ProductForm></ProductForm>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col cols="8">
+                <v-card>
+                    <v-card-title center class="text-uppercase">Product List</v-card-title>
+                    <v-card-text>
+                        <v-data-table
+                            :headers="headers"
+                            :items="list"
+                            :items-per-page="5"
+                            class="elevation-1"
+                        ></v-data-table>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
 
-    import ProductFrom from './Form'
+    import ProductForm from './Form'
 
     export default {
         name: 'ProductIndex',
         data () {
             return {
                 isEdit: false,
-                productId: null
+                productId: null,
+                headers: [
+                    {
+                        text: 'Name',
+                        align: 'start',
+                        value: 'name',
+                    },
+                    { text: 'Description', value: 'description' },
+                    { text: 'Quantity', value: 'quantity' },
+                    { text: 'Amount', value: 'amount' },
+                ],
             }
         },
         computed: {
@@ -96,7 +122,7 @@
             })
         },
         components: {
-            ProductFrom
+            ProductForm
         },
         mounted () {
             this.loadList()

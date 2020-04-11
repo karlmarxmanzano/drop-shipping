@@ -7,6 +7,8 @@ import Vue from 'vue';
 import router from './router/index';
 import store from './store/index';
 
+import vuetify from './plugins/vuetify';
+
 import mainApp from './App.vue'
 
 axios.defaults.headers.common['Accept'] = 'application/json'
@@ -20,6 +22,7 @@ store.dispatch('auth/attempt', localStorage.getItem('token'))
             el: '#app',
             router,
             store,
+            vuetify,
             components: {
                 mainApp
             }

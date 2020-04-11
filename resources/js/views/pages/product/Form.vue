@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onFormSubmit">
+    <!-- <form @submit.prevent="onFormSubmit">
         <div class="form-group">
             <label for="name">Name</label>
             <input 
@@ -35,7 +35,33 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary">{{ formStatus }}</button>
         </div>
-    </form>
+    </form> -->
+
+    <v-form>
+        <v-text-field
+            label="E-mail"
+            required
+        >
+        </v-text-field>
+
+        <v-text-field
+            label="E-mail"
+            required
+        >
+        </v-text-field>
+
+        <v-text-field
+            label="E-mail"
+            required
+        >
+        </v-text-field>
+
+        <v-text-field
+            label="E-mail"
+            required
+        >
+        </v-text-field>
+    </v-form>
 </template>
 
 <script>
@@ -63,9 +89,14 @@
         },
         methods: {
             ...mapActions({
-                addProduct: 'product/createProduct'
+                addProduct: 'product/createProduct',
+                getProducts: 'product/allProducts'
             }),
+            loadList () {
+                return this.getProducts()
+            },
             onFormSubmit () {
+                this.loadList()
                 return this.addProduct(this.form)
             }
         }

@@ -4,13 +4,13 @@ export default {
     namespaced: true,
 
     state: {
-        product: null,
+        details: null,
         list: []
     },
 
     mutations: {
-        SET_PRODUCT_INFO (state, payload) {
-            state.product = payload
+        SET_PERMISSION_INFO (state, payload) {
+            state.details = payload
         },
         SET_LIST (state, payload) {
             state.list = payload
@@ -18,8 +18,8 @@ export default {
     },
 
     actions: {
-        async allProducts ({ commit }, payload) {
-            return await axios.get('/product/list', payload)
+        async getList ({ commit }, payload) {
+            return await axios.get('/permissions/list', payload)
                 .then(res => {
                     commit('SET_LIST', res.data.data)
                 })
@@ -44,24 +44,6 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
-        },
-        async updateProduct ({ dispatch }, payload) {
-            return await axios.post('/product/edit/{product}', payload)
-                .then(res => {
-                    dispatch('SET_PRODUCT_INFO', res.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        },
-        async deleteProduct ({ dispatch }, payload) {
-            return await axios.post('/product/delete/{product}', payload)
-                .then(res => {
-                    dispatch('SET_PRODUCT_INFO', res.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
         }
     },
 
@@ -69,7 +51,7 @@ export default {
         productInfo (state) {
             return state.product
         },
-        productList (state) {
+        getPermissionList (state) {
             return state.list
         }
     }
