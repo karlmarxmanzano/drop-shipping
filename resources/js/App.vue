@@ -10,26 +10,10 @@
             <TheHeader />
             <v-content>
                 <v-container
-                    class="grey lighten-4"
                     fluid
-                    fill-height>
-                    <v-row>
-                        <v-col
-                            cols="12"
-                        >
-                            <v-breadcrumbs 
-                                class="py-0"
-                                :items="items"
-                                divider=">"
-                            ></v-breadcrumbs>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                        >
-                            <router-view></router-view>
-                        </v-col>
-                    </v-row>
-                    
+                    fill-height
+                >
+                    <router-view></router-view>
                 </v-container>
             </v-content>
         <!-- </template> -->

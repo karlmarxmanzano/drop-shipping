@@ -96,15 +96,6 @@
                             :tile="false"
                             nav
                         >
-                            <!-- <div>
-                                <app-bar-item
-                                    v-for="(n, i) in notifications"
-                                    :key="`item-${i}`"
-                                >
-                                    <v-list-item-title v-text="n"></v-list-item-title>
-                                </app-bar-item>
-                                
-                            </div> -->
 
                             <v-list-item
                                 class="pb-0"
@@ -133,6 +124,8 @@
 
         <v-navigation-drawer
             v-model="drawer"
+            color="purple"
+            dark
             app
         >
             <v-list
@@ -140,7 +133,9 @@
             >
                 <v-list-item>
                     <v-list-item-content>
-                        <v-list-item-title>Karl Marx Manzano</v-list-item-title>
+                        <v-list-item-title
+                            class="text-uppercase"
+                        >Drop Shipping</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -234,7 +229,7 @@
                 <div class="d-flex pa-4">
                     <v-icon>mdi-headset</v-icon>
                     <div class="d-flex flex-column pl-2 justify-center">
-                        <p class="caption ma-0">karlmarxmanzano@gmail.com</p>
+                        <p class="caption ma-0 white--text">karlmarxmanzano@gmail.com</p>
                     </div>
                 </div>
             </template>
