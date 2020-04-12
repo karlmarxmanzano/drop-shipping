@@ -50,24 +50,15 @@
     </div> -->
     <v-container>
         <v-row>
-            <v-col cols="4">
+            <v-col cols="12">
                 <v-card>
-                    <v-card-text>
-                        <ProductForm></ProductForm>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="8">
-                <v-card>
-                    <v-card-title center class="text-uppercase">Product List</v-card-title>
-                    <v-card-text>
-                        <v-data-table
-                            :headers="headers"
-                            :items="list"
-                            :items-per-page="5"
-                            class="elevation-1"
-                        ></v-data-table>
-                    </v-card-text>
+                    <v-card-title>Product List</v-card-title>
+                    <v-data-table
+                        :headers="headers"
+                        :items="list"
+                        :items-per-page="5"
+                        class="elevation-1"
+                    ></v-data-table>
                 </v-card>
             </v-col>
         </v-row>
@@ -91,9 +82,18 @@
                         align: 'start',
                         value: 'name',
                     },
-                    { text: 'Description', value: 'description' },
-                    { text: 'Quantity', value: 'quantity' },
-                    { text: 'Amount', value: 'amount' },
+                    { 
+                        text: 'Description', 
+                        value: 'description' 
+                    },
+                    { 
+                        text: 'Quantity', 
+                        value: 'quantity' 
+                    },
+                    { 
+                        text: 'Amount', 
+                        value: 'amount' 
+                    },
                 ],
             }
         },

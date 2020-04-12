@@ -1,32 +1,66 @@
 import axios from 'axios'
+import { getCurrentUser, getLocalPermissions, getLocalRoles, setHTTPToken } from "../../helpers/auth";
+
+const currentUser = getCurrentUser();
+const permissions = getLocalPermissions();
+const roles = getLocalRoles();
 
 export default {
     namespaced: true,
+
     state: {
         token: null,
-        user: null,
-        auth: false
+        auth: false,
+        currentUser: null,
+        authPermissions: permissions,
+        authRoles: roles,
+        loading: false,
+        err_msg: null
     },
 
     mutations: {
-        SET_TOKEN (state, token) {
-            state.token = token
+        login(state){
+            state.loading = true
+            state.err_msg = null
         },
-        SET_AUTH (state, payload) {
-            state.auth = payload
+        loginSuccess(state, payload){
+            state.err_msg = null
+            state.auth = true
+            state.loading = false
+            state.token = payload.access_token
+            state.currentUser = payload.user
+            state.auth_permissions = payload.permissions
+            state.auth_roles = payload.roles
+
+            localStorage.setItem("user", state.currentUser);
+            localStorage.setItem("permissions", state.authPermissions);
+            localStorage.setItem("roles", state.authRoles);
+
         },
-        SET_USER (state, data) {
-            state.user = data
-        }
+        loginFailed(state, payload){
+            state.loading = false;
+            state.err_msg = payload.error;
+        },
+        logout(state){
+            localStorage.removeItem("user");
+            localStorage.removeItem("permissions");
+            localStorage.removeItem("roles");
+
+            state.auth = false;
+            state.auth_permissions = null;
+            state.auth_roles = null;
+        },
     },
 
     actions: {
-        async signIn ({ dispatch }, credentials) {
-            return await axios.post('/auth/signin', credentials)
+        async signIn ({ commit }, credentials) {
+            await axios.post('/auth/signin', credentials)
                 .then(res => {
-                    dispatch('attempt', res.data.access_token)
+                    commit('loginSuccess', res.data)
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    commit('loginFailed', err)
+                })
         },
         async attempt ({ commit, state }, token) {
             
@@ -64,8 +98,20 @@ export default {
         authenticated (state) {
             return state.auth
         },
-        user (state) {
+        currentUser (state) {
             return state.user
-        }
+        },
+        authPermissions(state) {
+            return state.permissions
+        },
+        authRoles(state) {
+            return state.roles
+        },
+        isLoading(state){
+            return state.loading
+        },
+        authError(state){
+            return state.err_msg
+        },
     }
 }

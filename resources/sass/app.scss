@@ -15,5 +15,22 @@ html {
 }
 
 .v-application {
-    font-family: $body-font-family, sans-serif !important;
+    font-family: $body-font-family !important;
+
+    & .v-label {
+        font-size: $font-size-root !important;
+    }
+
+    & .display-1,
+    & .display-2 {
+        font-family: $body-font-family !important;
+    }
+}
+
+.v-messages {
+    font-size: 12px !important;
+}
+
+.v-alert {
+    font-size: $font-size-root !important;
 }

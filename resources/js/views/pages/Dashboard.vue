@@ -1,19 +1,154 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12">
-                <v-card>
-                    <v-card-title>Graph</v-card-title>
+            <v-col
+                cols="4"
+            >
+                <v-card
+                    class="mt-4"
+                >
+                    <v-sheet
+                        class="v-sheet--offset mx-auto"
+                        color="blue"
+                        elevation="3"
+                        max-width="calc(100% - 32px)"
+                        height="120px"
+                    >
+                        <v-sparkline
+                            :labels="labels"
+                            :value="value"
+                            :smooth="16"
+                            :line-width="3"
+                            color="white"
+                            auto-draw
+                            stroke-linecap="round"
+                            padding="16"
+                        ></v-sparkline>
+                    </v-sheet>
+
+                    <v-card-text class="pt-0">
+                        <div class="title font-weight-light mb-2">Sales</div>
+                        <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                        <v-divider class="my-2"></v-divider>
+                        <v-icon
+                            class="mr-2"
+                            small
+                        >
+                            mdi-clock
+                        </v-icon>
+                        <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+
+            <v-col
+                cols="4"
+            >
+                <v-card
+                    class="mt-4"
+                >
+                    <v-sheet
+                        class="v-sheet--offset mx-auto"
+                        color="blue"
+                        elevation="3"
+                        max-width="calc(100% - 32px)"
+                        height="120px"
+                    >
+                        <v-sparkline
+                            :labels="labels"
+                            :value="value"
+                            :smooth="16"
+                            :line-width="3"
+                            color="white"
+                            auto-draw
+                            stroke-linecap="round"
+                            padding="16"
+                        ></v-sparkline>
+                    </v-sheet>
+
+                    <v-card-text class="pt-0">
+                        <div class="title font-weight-light mb-2">User Registrations</div>
+                        <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                        <v-divider class="my-2"></v-divider>
+                        <v-icon
+                            class="mr-2"
+                            small
+                        >
+                            mdi-clock
+                        </v-icon>
+                        <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+
+            <v-col
+                cols="4"
+            >
+                <v-card
+                    class="mt-4"
+                >
+                    <v-sheet
+                        class="v-sheet--offset mx-auto"
+                        color="blue"
+                        elevation="3"
+                        max-width="calc(100% - 32px)"
+                        height="120px"
+                    >
+                        <v-sparkline
+                            :labels="labels"
+                            :value="value"
+                            :smooth="16"
+                            :line-width="3"
+                            color="white"
+                            auto-draw
+                            stroke-linecap="round"
+                            padding="16"
+                        ></v-sparkline>
+                    </v-sheet>
+
+                    <v-card-text class="pt-0">
+                        <div class="title font-weight-light mb-2">User Registrations</div>
+                        <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                        <v-divider class="my-2"></v-divider>
+                        <v-icon
+                            class="mr-2"
+                            small
+                        >
+                            mdi-clock
+                        </v-icon>
+                        <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+                    </v-card-text>
                 </v-card>
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="3">
-                <v-card>
-                    <v-card-text>
-                        <p class="text-uppercase overline">Users</p>
-                        <p class="title font-weight-bold">214</p>
+                <v-card
+                    class="mt-4"
+                 >
+                    <v-sheet
+                        class="v-sheet--offset ml-4 d-flex align-center justify-center"
+                        color="cyan"
+                        elevation="6"
+                        max-width="100px"
+                        height="80"
+                    >
+                        <p class="white--text display-2 mb-0">65</p>
+                    </v-sheet>
+
+                    <v-card-text class="pt-0">
+                        <div class="title font-weight-light mb-2">Current Buyers</div>
+                        <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                        <v-divider class="my-2"></v-divider>
+                        <v-icon
+                            class="mr-2"
+                            small
+                        >
+                            mdi-clock
+                        </v-icon>
+                        <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
                     </v-card-text>
+
                 </v-card>
             </v-col>
             <v-col cols="3">
@@ -44,42 +179,38 @@
         <v-row>
             <v-col cols="6">
                 <v-card>
-                    <v-card-title>
-                    Recent Activities
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
-                    </v-card-title>
+                    <v-sheet
+                        class="v-sheet--offset mt-4 mx-4 d-flex align-center justify-center"
+                        color="cyan"
+                        elevation="6"
+                        height="50"
+                    >
+                        <div class="white--text title text-uppercase">Recent Activities</div>
+                    </v-sheet>
+                    
                     <v-data-table
-                    :headers="headers"
-                    :items="desserts"
-                    :search="search"
-                    ></v-data-table>
+                        :headers="headers"
+                        :items="desserts"
+                        :search="search"
+                        ></v-data-table>
                 </v-card>
             </v-col>
             <v-col cols="6">
                 <v-card>
-                    <v-card-title>
-                    Order Status
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
-                    </v-card-title>
+                    <v-sheet
+                        class="v-sheet--offset mt-4 mx-4 d-flex align-center justify-center"
+                        color="cyan"
+                        elevation="6"
+                        height="50"
+                    >
+                        <div class="white--text title text-uppercase">Recent Orders</div>
+                    </v-sheet>
+                    
                     <v-data-table
-                    :headers="headers"
-                    :items="desserts"
-                    :search="search"
-                    ></v-data-table>
+                        :headers="headers"
+                        :items="desserts"
+                        :search="search"
+                        ></v-data-table>
                 </v-card>
             </v-col>
         </v-row>
@@ -92,7 +223,26 @@
         name: 'dashboard',
         data() {
             return {
-                search: '',
+                labels: [
+                    '12am',
+                    '3am',
+                    '6am',
+                    '9am',
+                    '12pm',
+                    '3pm',
+                    '6pm',
+                    '9pm',
+                ],
+                value: [
+                    200,
+                    675,
+                    410,
+                    390,
+                    310,
+                    460,
+                    250,
+                    240,
+                ],
                 headers: [
                     {
                         text: 'Dessert (100g serving)',
@@ -201,3 +351,16 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .v-sheet--offset {
+        top: -24px;
+        position: relative;
+    }
+
+    .v-application {
+        & .title {
+            letter-spacing: 1.5px !important;
+        }
+    }
+</style>

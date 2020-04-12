@@ -1,19 +1,37 @@
 <template>
-    <v-container fluid fill-height class="grey lighten-4">
+    <v-container
+        class="grey lighten-4"
+        fluid
+        fill-height
+    >
         <v-row
             align="center"
             justify="center"
         >
             <v-col
                 cols="12"
-                sm="8"
+                lg="4"
                 md="4"
+                sm="12"
             >
                 <v-card
                     class="pa-8"
                 >
-                    <v-card-title center class="text-uppercase grey--text justify-center">Drop <span class="blue--text pl-2">Shipping</span></v-card-title>
+                    <v-card-title 
+                        class="text-uppercase
+                        center 
+                        grey--text 
+                        justify-center"
+                    >Drop <span class="blue--text pl-2">Shipping</span></v-card-title>
+
                     <v-card-text>
+                        <v-alert 
+                            type="error"
+                            dismissible
+                        >
+                            I'm an error alert.
+                        </v-alert>
+
                         <v-form>
                             <v-text-field
                                 v-model="form.email"
@@ -29,8 +47,7 @@
                                 :rules="[rules.required, rules.min]"
                                 :type="showPassword ? 'text' : 'password'"
                                 name="input-10-1"
-                                label="Normal with hint text"
-                                hint="At least 8 characters"
+                                label="Password"
                                 counter
                                 @click:append="showPassword = !showPassword"
                             ></v-text-field>
@@ -41,9 +58,13 @@
                         </v-form>
                     </v-card-text>
 
-                    <v-card-actions class="mx-2">
+                    <v-card-actions 
+                        class="mx-2"
+                    >
                         <v-row>
-                            <v-col cols="12">
+                            <v-col 
+                                cols="12"
+                            >
                                 <v-btn 
                                     block 
                                     color="primary" 
@@ -51,7 +72,10 @@
                                     @click="onSignIn"
                                 >Sign in</v-btn>
                             </v-col>
-                            <v-col cols="12">
+
+                            <v-col 
+                                cols="12"
+                            >
                                 Not a member? <a href="#">Sign up</a> for free!
                             </v-col>
                         </v-row>
@@ -121,10 +145,9 @@
                 },
                 showPassword: false,
                 rules: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters',
-          emailMatch: () => ('The email and password you entered don\'t match'),
-        },
+                    required: value => !!value || 'Required.',
+                    min: v => v.length >= 8 || 'Min 8 characters',
+                },
             }
         },
         methods: {

@@ -1,53 +1,23 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
+    <v-card>
+        <v-card-title>
+            Order Status
+            <v-spacer></v-spacer>
+            <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+            ></v-text-field>
+        </v-card-title>
 
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        User List
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Roles</th>
-                                    <th scope="col">Created At</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- <tr>
-                                    <th scope="row">1</th>
-                                    <td>T-shirt</td>
-                                    <td>Plain white</td>
-                                    <td>1</td>
-                                    <td>79.00</td>
-                                    <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-                                </tr> -->
-                                <tr v-for="(user, key) in list" v-bind:key="key">
-                                    <td>{{ user.first_name }}</td>
-                                    <td>{{ user.last_name }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>
-                                        <span class="" v-for="(role, roleKey) in user.roles" v-bind:key="roleKey">
-                                            {{ role.name }}
-                                        </span>
-                                    </td>
-                                    <td>{{ user.created_at }}</td>
-                                    <td><a href="#" @click.prevent="">Edit</a> | <a href="#">Delete</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+        <v-data-table
+        :headers="headers"
+        :items="users"
+        :search="search"
+        ></v-data-table>
+    </v-card>
 </template>
 
 <script>
@@ -57,7 +27,70 @@
         name: 'UserList',
         data () {
             return {
+                search: '',
+                headers: [
+                    {
+                        text: 'First Name',
+                        align: 'start',
+                        value: 'firstName',
+                    },
+                    {
+                        text: 'Last Name',
+                        value: 'lastName'
+                    },
+                    {
+                        text: 'Role',
+                        value: 'role'
+                    },
+                    {
+                        text: 'Active Items',
+                        value: 'activeItems'
+                    },
+                    {
+                        text: 'Action',
+                        value: ''
+                    },
+                ],
+                users: [
+                    {
+                        firstName: 'John',
+                        lastName: 'Doe',
+                        role: 'Seller',
+                        activeItems: '12'
+                    },
+                    {
+                        firstName: 'Jane',
+                        lastName: 'Doe',
+                        role: 'Seller',
+                        activeItems: '14'
+                    },
+                    {
+                        firstName: 'Juan',
+                        lastName: 'Dela Cruz',
+                        role: 'Buyer',
+                        activeItems: '11'
+                    },
+                    {
+                        firstName: 'Tim',
+                        lastName: 'Murphy',
+                        role: 'Seller',
+                        activeItems: '6'
+                    },
+                    {
+                        firstName: 'John',
+                        lastName: 'Snow',
+                        role: 'Buyer',
+                        activeItems: '4'
+                    },
+                    {
+                        firstName: 'John',
+                        lastName: 'Doe',
+                        role: 'Seller',
+                        activeItems: '12'
+                    },
 
+                ],
+                
             }
         },
         computed: {

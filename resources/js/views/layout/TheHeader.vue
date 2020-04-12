@@ -1,45 +1,141 @@
 <template>
-    <v-card>
-        <v-app-bar
-            app
-            flat
-        >
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-
-            <v-toolbar-title class="text-uppercase">
-                <span class="font-weight-light">Drop Shipping</span>
-            </v-toolbar-title>
-            
-            <v-spacer></v-spacer>
-
-            <!-- <v-menu offset-y>
-                <template v-slot:activator="{ on }">
+    <v-container>
+        <v-row>
+            <v-col cols="12">
+                <v-app-bar
+                    app
+                    flat
+                    class="px-4"
+                    absolute
+                >
                     <v-btn
-                        text
-                        v-on="on"
+                        class="mr-3"
+                        elevation="1"
+                        @click="drawer = !drawer"
+                        color="white"
+                        small
+                        fab
                     >
-                        Dropdown
-                    </v-btn>
-                </template>
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-title>Menu 1</v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu> -->
+                        <v-icon v-if="drawer">
+                            mdi-menu
+                        </v-icon>
 
-            <v-btn icon @click.prevent="onSignOut">
-                <v-icon>mdi-logout-variant</v-icon>
-            </v-btn>
-        </v-app-bar>
+                        <v-icon v-else>
+                            mdi-menu-open
+                        </v-icon>
+                        </v-btn>
+
+                    <v-toolbar-title
+                        class="hidden-sm-and-down font-weight-light"
+                        v-text="$route.name"
+                    />
+                    
+                    <v-spacer></v-spacer>
+
+                    <v-text-field
+                        label="Search"
+                        append-icon="mdi-magnify"
+                        filled
+                        rounded
+                        single-line
+                        solo
+                        flat
+                        dense
+                        hide-details
+                    ></v-text-field>
+
+                    <div class="mx-3" />
+
+                    <!-- <v-btn 
+                        class="ml-2"
+                        icon
+                    >
+                        <v-badge
+                            content="1"
+                            value="1"
+                            color="blue"
+                            overlap
+                            bordered
+                        >
+                            <v-icon
+                                color="black"
+                            >mdi-bell-outline</v-icon>
+                        </v-badge>
+                    </v-btn> -->
+
+                    <v-menu
+                        bottom
+                        left
+                        offset-y
+                        origin="top right"
+                        transition="scale-transition"
+                    >
+                        <template v-slot:activator="{ attrs, on }">
+                            <v-btn
+                                class="ml-2"
+                                min-width="0"
+                                icon
+                                v-bind="attrs"
+                                v-on="on"
+                            >
+                                <v-badge
+                                    color="red"
+                                    overlap
+                                    bordered
+                                >
+                                    <template v-slot:badge>
+                                        <span>5</span>
+                                    </template>
+
+                                    <v-icon>mdi-bell-outline</v-icon>
+                                </v-badge>
+                            </v-btn>
+                        </template>
+
+                        <v-list
+                            :tile="false"
+                            nav
+                        >
+                            <!-- <div>
+                                <app-bar-item
+                                    v-for="(n, i) in notifications"
+                                    :key="`item-${i}`"
+                                >
+                                    <v-list-item-title v-text="n"></v-list-item-title>
+                                </app-bar-item>
+                                
+                            </div> -->
+
+                            <v-list-item
+                                class="pb-0"
+                                v-for="(n, i) in notifications"
+                                :key="`item-${i}`"
+                                dense
+                            >
+                                <v-list-item-content>
+                                    <v-list-item-title 
+                                        v-text="n"
+                                    ></v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+
+                        </v-list>
+                    </v-menu>
+
+                    <v-btn icon>
+                        <v-icon
+                            color="black"
+                        >mdi-account-outline</v-icon>
+                    </v-btn>
+                </v-app-bar>
+            </v-col>
+        </v-row>
 
         <v-navigation-drawer
             v-model="drawer"
-            width="220"
             app
         >
-            <v-list 
-                dense
+            <v-list
                 nav
             >
                 <v-list-item>
@@ -123,13 +219,12 @@
                 <v-list-item-group>
                     <v-list-item
                         router 
-                        :to="{ name: 'Product' }"
                     >
                        <v-list-item-icon>
                            <v-icon>mdi-file-document-outline</v-icon>
                         </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title>Products</v-list-item-title>
+                            <v-list-item-title>Reports</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list-item-group>
@@ -145,7 +240,7 @@
             </template>
 
         </v-navigation-drawer>
-    </v-card>
+    </v-container>
     <!-- <div id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
@@ -262,11 +357,20 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex'
+    import { VListItem } from 'vuetify/lib'
+
     export default {
         name: 'TheHeader',
         data() {
             return {
                 drawer: true,
+                notifications: [
+                    'Mike John Responded to your email',
+                    'You have 5 new tasks',
+                    'You\'re now friends with Andrew',
+                    'Another Notification',
+                    'Another one',
+                ],
             }
         },
         computed: {
@@ -287,3 +391,9 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .v-text-field {
+        max-width: 300px;
+    }
+</style>

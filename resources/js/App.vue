@@ -9,15 +9,35 @@
         <!-- <template v-if="auth"> -->
             <TheHeader />
             <v-content>
-                <v-container>
-                    <router-view></router-view>
+                <v-container
+                    class="grey lighten-4"
+                    fluid
+                    fill-height>
+                    <v-row>
+                        <v-col
+                            cols="12"
+                        >
+                            <v-breadcrumbs 
+                                class="py-0"
+                                :items="items"
+                                divider=">"
+                            ></v-breadcrumbs>
+                        </v-col>
+                        <v-col
+                            cols="12"
+                        >
+                            <router-view></router-view>
+                        </v-col>
+                    </v-row>
+                    
                 </v-container>
             </v-content>
         <!-- </template> -->
 
-        <!-- <template v-else>
-            <SignIn></SignIn>
-        </template> -->
+        <!-- <template v-else> -->
+            <!-- <SignIn></SignIn> -->
+            <!-- <router-view></router-view> -->
+        <!-- </template> -->
 
 		
 	</v-app>
@@ -30,6 +50,27 @@
 
     export default {
         name: 'mainApp',
+        data() {
+            return {
+                items: [
+                    {
+                    text: 'Dashboard',
+                    disabled: false,
+                    href: 'breadcrumbs_dashboard',
+                    },
+                    {
+                    text: 'Link 1',
+                    disabled: false,
+                    href: 'breadcrumbs_link_1',
+                    },
+                    {
+                    text: 'Link 2',
+                    disabled: true,
+                    href: 'breadcrumbs_link_2',
+                    },
+                ],
+            }
+        },
         computed: {
             ...mapGetters({
                 auth: 'auth/authenticated'

@@ -3,6 +3,23 @@
 }
 
 .v-application {
-  font-family: "Montserrat", sans-serif, sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.v-application .v-label {
+  font-size: 14px !important;
+}
+
+.v-application .display-1,
+.v-application .display-2 {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.v-messages {
+  font-size: 12px !important;
+}
+
+.v-alert {
+  font-size: 14px !important;
 }
 
