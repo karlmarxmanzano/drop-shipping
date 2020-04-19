@@ -16,6 +16,7 @@
                     <router-view></router-view>
                 </v-container>
             </v-content>
+            <TheFooter />
         <!-- </template> -->
 
         <!-- <template v-else> -->
@@ -29,6 +30,8 @@
 
 <script>
     import TheHeader from './views/layout/TheHeader'
+    import TheFooter from './views/layout/TheFooter'
+
     import SignIn from './views/pages/auth/SignIn'
     import { mapGetters } from 'vuex'
 
@@ -62,6 +65,7 @@
         },
         components: {
             TheHeader,
+            TheFooter,
             SignIn
         }
     }

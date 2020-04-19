@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <!-- <v-container>
         <v-row>
             <v-col
                 cols="4"
@@ -214,6 +214,9 @@
                 </v-card>
             </v-col>
         </v-row>
+    </v-container> -->
+    <v-container>
+        
     </v-container>
 </template>
 
